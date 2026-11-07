@@ -1,0 +1,125 @@
+/* 个人主页的视觉覆盖集中在此，不污染技能模板或其他项目。 */
+html {
+  background: #f6f6f2;
+  scrollbar-gutter: stable;
+}
+body {
+  color: #161a17;
+  background: #f6f6f2;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+::selection {
+  color: #161a17;
+  background: #d3fa60;
+}
+.swarm-experience {
+  --paper: #f6f6f2;
+  --ink: #161a17;
+  background-color: var(--paper);
+  background-image: radial-gradient(#dfe1d7 0.6px, transparent 0.6px);
+  background-size: 22px 22px;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+.swarm-experience .scene-action--button:hover {
+  background: rgb(182 222 69 / 8%);
+  box-shadow: inset 0 0 0 2px #a2bf4b;
+}
+.swarm-experience .scene-action--link:hover {
+  background: rgb(181 213 95 / 15%);
+  box-shadow: 0 2px 0 #769333;
+}
+.swarm-experience .scene-action:focus-visible {
+  outline-color: #68842a;
+}
+/* 顶部菜单使用细直角描边，悬停和键盘聚焦共用反馈且不改变布局尺寸。 */
+.swarm-experience .nav-canvas .scene-action--link:hover,
+.swarm-experience .nav-canvas .scene-action--link:focus-visible {
+  background: rgb(181 213 95 / 15%);
+  box-shadow: inset 0 0 0 1px #a2b97a;
+}
+.swarm-experience .nav-canvas .scene-action--link:active {
+  background: rgb(181 213 95 / 28%);
+  box-shadow: inset 0 0 0 1px #68842a;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.personal-dock {
+  position: fixed;
+  right: 26px;
+  bottom: 22px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 7px 7px 7px 16px;
+  color: #565e50;
+  background: rgb(250 251 246 / 95%);
+  border: 1px solid #dce1d1;
+  border-radius: 100px;
+  box-shadow: 0 6px 24px rgb(26 40 8 / 7%);
+  backdrop-filter: blur(12px);
+}
+.dock-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 500 9px/1.4 "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+}
+.dock-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #779b2e;
+  box-shadow: 0 0 0 3px #ecf3dc;
+}
+.personal-dock button {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  min-height: 34px;
+  padding: 5px 14px;
+  border: 0;
+  border-radius: 100px;
+  background: #e9efd9;
+  color: #394c1d;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.personal-dock button span {
+  font-size: 17px;
+}
+.personal-dock button:hover {
+  background: #d3fa60;
+}
+.personal-dock button:focus-visible {
+  outline: 2px solid #68842a;
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .personal-dock {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 12px;
+    padding-left: 12px;
+  }
+  .dock-status {
+    font-size: 8px;
+  }
+  .personal-dock button {
+    min-height: 38px;
+    font-size: 11px;
+  }
+}

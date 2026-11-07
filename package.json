@@ -1,0 +1,28 @@
+{
+  "name": "swarm-cursors-skills",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "在工程源码中实现多光标协作施工效果的Skill与React演示项目",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cxyax/swarm-cursors-skills.git"
+  },
+  "homepage": "https://cxyax.github.io/swarm-cursors-skills/",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "vite": "8.1.4"
+  }
+}

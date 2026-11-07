@@ -1,0 +1,4 @@
+interface:
+  display_name: "多光标施工页面"
+  short_description: "复用可编辑的多光标施工动画、巡航跟随与点击交互，接入独立页面或React路由"
+  default_prompt: "使用 $swarm-page-builder 将多光标施工效果接入当前项目，保留现有业务，并生成可编辑的场景和点击交互。"

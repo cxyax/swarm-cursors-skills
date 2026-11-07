@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+node_modules/
+*.log
+dist/
+.worktrees/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc

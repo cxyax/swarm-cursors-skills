@@ -1,0 +1,12 @@
+/* 独立演示页的全局布局；已有项目只复制swarm模块，不应导入此文件。 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+#root {
+  width: 100%;
+  min-height: 100vh;
+}

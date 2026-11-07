@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-labelledby="title desc">
+  <title id="title">Swarm Cursors Skills</title>
+  <desc id="desc">Three cursors assembling a bright square beside the project name.</desc>
+  <rect width="640" height="160" rx="24" fill="#161a17"/>
+  <rect x="48" y="37" width="86" height="86" rx="12" fill="#d3fa60"/>
+  <path d="M32 25v38l10-9 8 16 9-5-9-16 15-2z" fill="#fff" stroke="#161a17" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M142 96v34l-9-8-8 14-8-4 8-14-14-2z" fill="#8d9bff" stroke="#161a17" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M102 61v35l9-8 8 15 8-4-8-15 14-2z" fill="#161a17"/>
+  <text x="169" y="75" fill="#fff" font-family="Arial, sans-serif" font-size="34" font-weight="700">SWARM CURSORS</text>
+  <text x="171" y="110" fill="#d3fa60" font-family="Arial, sans-serif" font-size="18" letter-spacing="5">SKILLS / BUILD TOGETHER</text>
+</svg>

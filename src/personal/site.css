@@ -123,3 +123,16 @@ body {
     font-size: 11px;
   }
 }
+
+/* 复制反馈与施工动画分离，避免影响场景布局。 */
+.copy-notice:not(:empty) {
+  position: fixed;
+  z-index: 46;
+  right: 26px;
+  bottom: 86px;
+  padding: 10px 16px;
+  color: #f6f6f2;
+  background: #252b24;
+  border-radius: 6px;
+  font-size: 13px;
+}

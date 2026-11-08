@@ -93,18 +93,18 @@ function ProjectContent({ project, index, onClose, language }) {
   return (
     <>
       <div className="personal-project-meta">
-        <span>{language === "zh" ? "作品" : "PROJECT"} {String(index + 1).padStart(2, "0")}</span>
+        <span>{language === "zh" ? "步骤" : "STEP"} {String(index + 1).padStart(2, "0")}</span>
         <span>{project.category}</span>
         <span>{project.year}</span>
       </div>
       <p className="personal-dialog-description">{project.description}</p>
-      <div className="personal-tags" aria-label={language === "zh" ? "项目标签" : "Project tags"}>
+      <div className="personal-tags" aria-label={language === "zh" ? "步骤标签" : "Step tags"}>
         {project.tags.map((tag) => (
           <span key={tag}>{tag}</span>
         ))}
       </div>
-      <section className="personal-details" aria-label={language === "zh" ? "作品亮点" : "Project highlights"}>
-        <h3>{language === "zh" ? "一些值得展开的细节" : "A closer look"}</h3>
+      <section className="personal-details" aria-label={language === "zh" ? "步骤说明" : "Step details"}>
+        <h3>{language === "zh" ? "如何操作" : "How to do it"}</h3>
         <ol>
           {project.details.map((detail, detailIndex) => (
             <li key={detail}>
@@ -116,6 +116,7 @@ function ProjectContent({ project, index, onClose, language }) {
           ))}
         </ol>
       </section>
+      {project.command && <CopyBlock text={project.command} label={language === "zh" ? "复制内容" : "Copy"} language={language} />}
       <div className="personal-dialog-actions">
         {project.url ? (
           <a
@@ -128,7 +129,7 @@ function ProjectContent({ project, index, onClose, language }) {
           </a>
         ) : (
           <button className="personal-button" type="button" onClick={onClose}>
-            {language === "zh" ? "继续探索主页" : "Continue exploring"} <span aria-hidden="true">↗</span>
+            {language === "zh" ? "继续查看教程" : "Continue reading"} <span aria-hidden="true">↗</span>
           </button>
         )}
       </div>
@@ -137,53 +138,42 @@ function ProjectContent({ project, index, onClose, language }) {
 }
 
 /**
- * 展示联系信息与可复制的个人介绍，示例邮箱不会触发邮件发送入口。
- * @returns {React.ReactElement} 联系内容。
+ * 展示安装命令和仓库入口，方便用户直接开始使用 Skill。
+ * @param {{profile:object,language:string}} props 当前语言与教程资料。
+ * @returns {React.ReactElement} 安装说明。
  */
-function ContactContent({ profile, language }) {
-  // 配置替换为真实邮箱后才开放mailto，避免把示例地址误当成真实联系方式。
-  const email = profile.email.trim();
-  const isExample = email.toLowerCase().endsWith("@example.com");
-  const introduction = `${profile.name} · ${profile.role}\n${profile.description}`;
+function InstallContent({ profile, language }) {
+  // 安装命令与第一步教程共用，避免两个入口的内容不一致。
   return (
     <>
       <p className="personal-dialog-description">
-        {language === "zh" ? "关于一个新想法、一次合作，或只是打个招呼。" : "Have an idea, a collaboration, or just want to say hello?"}
-        <br />
-        {language === "zh" ? "好的故事，往往从一句「你好」开始。" : "Good stories often start with hello."}
+        {language === "zh" ? "需要 Node.js 22.20 或更高版本。运行命令后选择要安装的编码助手。" : "Requires Node.js 22.20 or later. Run the command and select your coding agents."}
       </p>
-      <div className="personal-contact-label">
-        <span className="personal-contact-dot" aria-hidden="true" />
-        <span>{language === "zh" ? "保持好奇，也保持联系" : "Stay curious, stay in touch"}</span>
-      </div>
-      {email ? (
-        <>
-          <CopyBlock text={email} label={language === "zh" ? "复制邮箱" : "Copy email"} language={language} compact />
-          {isExample ? (
-            <p className="personal-contact-note">{language === "zh" ? "示例邮箱，可在个人资料中替换。" : "Example email; replace it in the profile."}</p>
-          ) : (
-            <a className="personal-button" href={`mailto:${encodeURIComponent(email)}`}>
-              {language === "zh" ? "写一封邮件" : "Send an email"} <span aria-hidden="true">↗</span>
-            </a>
-          )}
-        </>
-      ) : (
-        <p className="personal-contact-note">{language === "zh" ? "联系方式正在整理，先认识一下我。" : "Contact details are coming soon."}</p>
-      )}
-      <section className="personal-introduction">
-        <h3>{language === "zh" ? "一张文字名片" : "A short introduction"}</h3>
-        <CopyBlock text={introduction} label={language === "zh" ? "复制介绍" : "Copy introduction"} language={language} />
-      </section>
-      {profile.github && (
-        <a
-          className="personal-text-link"
-          href={profile.github}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {language === "zh" ? "去 GitHub 看看" : "Visit GitHub"} <span aria-hidden="true">↗</span>
-        </a>
-      )}
+      <CopyBlock text={profile.projects[0].command} label={language === "zh" ? "复制安装命令" : "Copy install command"} language={language} />
+      <p className="personal-contact-note">
+        {language === "zh" ? "去掉 -g 可安装到当前项目。安装后如果助手没有发现 Skill，请重启助手。仓库需公开且可访问。" : "Omit -g for a project-only installation. Restart your agent if it cannot find the skill. The repository must be public and accessible."}
+      </p>
+      <a className="personal-button" href={profile.github} target="_blank" rel="noopener noreferrer">
+        {language === "zh" ? "查看仓库与完整文档" : "View repository and full guide"} <span aria-hidden="true">↗</span>
+      </a>
+    </>
+  );
+}
+
+/**
+ * 展示作者邮箱，支持复制或通过邮件客户端联系。
+ * @param {{profile:object,language:string}} props 教程资料和当前语言。
+ * @returns {React.ReactElement} 联系方式。
+ */
+function ContactContent({ profile, language }) {
+  // 邮箱与项目资料共用，复制失败时可手动选择文本。
+  return (
+    <>
+      <p className="personal-dialog-description">{language === "zh" ? "有问题或想法，欢迎通过邮件联系作者。" : "Questions or ideas? Contact the author by email."}</p>
+      <CopyBlock text={profile.email} label={language === "zh" ? "复制邮箱" : "Copy email"} language={language} compact />
+      <a className="personal-button" href={`mailto:${encodeURIComponent(profile.email)}`}>
+        {language === "zh" ? "发送邮件" : "Send email"} <span aria-hidden="true">↗</span>
+      </a>
     </>
   );
 }
@@ -281,6 +271,7 @@ export function PersonalDialog({ dialog, onClose, language, profile }) {
   }
 
   const isProject = dialog?.kind === PersonalDialogKind.PROJECT;
+  const isInstall = dialog?.kind === PersonalDialogKind.INSTALL;
   const requestedIndex = dialog?.index ?? 0;
   const index = profile.projects[requestedIndex] ? requestedIndex : 0;
   const project = profile.projects[index];
@@ -297,7 +288,7 @@ export function PersonalDialog({ dialog, onClose, language, profile }) {
         <div className="personal-dialog-surface">
           <header className="personal-dialog-header">
             <span className="personal-dialog-wordmark">
-              <span aria-hidden="true">ax.</span> {profile.name}
+              <span aria-hidden="true">✳</span> {profile.name}
             </span>
             <button
               className="personal-dialog-close"
@@ -309,13 +300,15 @@ export function PersonalDialog({ dialog, onClose, language, profile }) {
             </button>
           </header>
           <div className="personal-dialog-kicker">
-            {isProject ? "SELECTED WORK" : "SAY HELLO"}
+            {isProject ? "GET STARTED" : isInstall ? "INSTALL THE SKILL" : "CONTACT"}
           </div>
           <h2 id="personal-dialog-title" ref={titleRef} tabIndex={-1}>
-            {isProject ? project?.title ?? (language === "zh" ? "关于这件作品" : "About this project") : (language === "zh" ? "让有趣的想法，发生。" : "Let’s make something interesting.")}
+            {isProject ? project?.title ?? (language === "zh" ? "使用步骤" : "Getting started") : (isInstall ? (language === "zh" ? "安装 Swarm Skill" : "Install Swarm Skill") : (language === "zh" ? "联系作者" : "Contact the author"))}
           </h2>
           {isProject && project ? (
             <ProjectContent project={project} index={index} onClose={requestClose} language={language} />
+          ) : isInstall ? (
+            <InstallContent profile={profile} language={language} />
           ) : (
             <ContactContent profile={profile} language={language} />
           )}

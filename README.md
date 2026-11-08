@@ -6,7 +6,7 @@ English | [简体中文](README.zh-CN.md)
 
 **Build a page with a swarm of cursors, directly in your own project.**
 
-`swarm-page-builder` is a reusable AI skill with editable React source, a scene builder, and a scaffolding script. It recreates the collaborative construction experience inspired by [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors). The personal homepage in this repository is a demo built with the skill.
+`swarm-page-builder` is a reusable AI skill with editable React source, a scene builder, and a scaffolding script. It recreates the collaborative construction experience inspired by [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors). The tutorial page in this repository is a demo built with the skill.
 
 [Live demo](https://cxyax.github.io/swarm-cursors-skills/) · [Repository](https://github.com/cxyax/swarm-cursors-skills) · [Skill](skills/swarm-page-builder/SKILL.md)
 
@@ -145,7 +145,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:5174/`. The demo starts in English; use the language button in the bottom-right dock to switch to Chinese. Switching language restarts the construction. Scroll to continue building, open completed project cards, copy the contact email, or replay the animation.
+Open `http://127.0.0.1:5174/`. The demo starts in Chinese; use the language button in the bottom-right dock to switch to English. Switching language restarts the construction. Copy the install command from the first screen, scroll to explore the guide, contact the author, or replay the animation.
 
 If the port is occupied, use `npm run dev -- --port 5175`. To build and preview locally:
 
@@ -169,7 +169,7 @@ The build output is `dist/`; the preview uses `http://127.0.0.1:5174/`. Vite pre
 | Cursor counts, names and states | [`src/swarm/animation/config.js`](src/swarm/animation/config.js) |
 | Page title, description and fonts | [`index.html`](index.html) |
 
-Replace the demo's personal information and contact email in your fork. A project with an empty `url` shows local details only. For the generic template, edit `src/swarm/scene/sections/`; the [scene and interaction guide](skills/swarm-page-builder/references/customization.md) documents its protocol. Supply matching `interactions` when using a custom `sceneFactory`; change the React `key` to rebuild an instance when changing scenes or replaying.
+Edit the tutorial content and contact email in your fork. For the generic template, edit `src/swarm/scene/sections/`; the [scene and interaction guide](skills/swarm-page-builder/references/customization.md) documents its protocol. Supply matching `interactions` when using a custom `sceneFactory`; change the React `key` to rebuild an instance when changing scenes or replaying.
 
 The demo and skill template are separate snapshots. Changes to the root `src/` do not automatically update `skills/swarm-page-builder/assets/template/`. Fonts are loaded from Google Fonts by default and can be replaced with local fonts.
 
@@ -207,4 +207,4 @@ The chart is provided by Star History and requires the repository to be public b
 
 Inspired by [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors), which credits the original visual and motion design to [Joel Califa's Swarm](https://califa.github.io/swarm-site/). This project is not affiliated with either project.
 
-The reference repository currently states that it has no license. This repository's license is pending confirmation of source provenance and authorization; no repository-wide MIT license has been claimed. See [SOURCE.md](SOURCE.md) for details.
+This project is distributed under the [MIT License](LICENSE). The reference repository states that it has no license; the MIT license does not grant rights to third-party material. See [SOURCE.md](SOURCE.md) for the unresolved provenance details.

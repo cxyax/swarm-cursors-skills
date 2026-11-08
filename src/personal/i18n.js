@@ -1,45 +1,45 @@
 import { PROFILE } from "./profile.js";
 
-/** 英文演示资料，与中文资料保持相同的数据结构。 */
+/** 英文教程内容，与中文教程共享链接及步骤结构。 */
 export const EN_PROFILE = {
   ...PROFILE,
-  name: "Axin",
-  role: "Developer · Creator · Lifelong learner",
-  description: "Turning technology into useful tools,\nand ideas into things you can touch.",
+  role: "Editable source · Collaborative cursors · React",
+  description: "Bring collaborative construction to your project.\nInstall the skill and start building.",
   about: [
-    "Hi, I'm Axin. I explore the space between code and design, turning small questions into clear, useful and playful things.",
-    "I care about the whole experience, from a click on the screen to the logic behind it. This workspace collects projects and ongoing curiosities.",
+    "The skill provides editable React components, a scene builder and a scaffold. Cursors draw shapes, type text and continue building as you scroll.",
+    "Generated pages need no skill, backend or AI API key at runtime. Scenes are configured in code; existing DOM is not automatically converted.",
   ],
-  skills: PROFILE.skills.map((skill, index) => ({ ...skill, detail: [
-    "Reliable services and clear business logic", "Interactive, maintainable web experiences", "Automating repetitive work", "Exploring human and AI collaboration", "Connecting systems through data", "Crafting thoughtful interfaces",
-  ][index] })),
-  projects: PROFILE.projects.map((project, index) => ({
-    ...project,
-    title: ["Swarm Studio", "My Digital Workspace", "Skill Kit"][index],
-    description: ["A swarm of cursors, one canvas.\nA page built as you explore.", "Room for projects,\nand room for new ideas.", "Turn a spark of inspiration\ninto a starting point for the next project."][index],
-    details: [
-      ["Text, paths and cards become tasks shared by multiple cursors.", "Dependencies build cards before text and activate interactions afterwards.", "Rulers, anchors and duplication make the creative process visible."],
-      ["A personal homepage with editable profile, skills and projects.", "An open desktop grid and a dedicated mobile layout.", "Project details and contact actions join the construction animation."],
-      ["Reusable skills, templates and migration scripts for future projects.", "Inject scenes and actions while retaining the host application's behavior.", "Scoped styles reduce conflicts with the surrounding application."],
-    ][index],
-  })),
+  skills: [
+    { name: "Cursor swarm", detail: "Draw, type and duplicate together" },
+    { name: "Scroll to build", detail: "Reveal tasks as the page scrolls" },
+    { name: "Task dependencies", detail: "Enable interactions when ready" },
+    { name: "Custom scenes", detail: "Edit copy, graphics and actions" },
+    { name: "React integration", detail: "Standalone or full-screen route" },
+    { name: "Editable source", detail: "Keep developing in your project" },
+  ],
+  projects: [
+    { ...PROFILE.projects[0], title: "Install the skill", description: "Install the complete skill\nfor your coding agent.", details: ["Run the installation command and select your coding agents. The -g flag installs it across projects.", "Omit -g to install in the current project. Restart your agent if the skill is not discovered.", "The repository must be public and accessible. The complete skill includes templates, scripts and references."] },
+    { ...PROFILE.projects[1], title: "Describe your page", description: "Tell your agent what to build\nand how it should work.", details: ["Invoke $swarm-page-builder in Codex and describe the target directory, content and interactions.", "For an existing React app, specify the route and module directory so the agent can follow existing dependencies.", "Ask for a mobile layout, replay button and custom actions as needed."], command: "Use $swarm-page-builder to create a product page in a new directory. Include features, usage steps and contact, with a mobile layout and replay button." },
+    { ...PROFILE.projects[2], title: "Customize & integrate", description: "Adapt scenes and actions\nto fit your own project.", details: ["The skill chooses a standalone project or a full-screen route in an existing React app.", "Edit scene sections, copy, colors and interaction mappings in the generated source; the animation engine remains separate.", "The template uses document scrolling and supports one instance per page. Local scroll containers require adaptation."], command: "Use $swarm-page-builder to add a full-screen demo route to this React project, follow existing dependencies and connect the main button to a host action." },
+  ],
 };
 
-/** 按场景实体标识提供英文文案，资料字段由英文资料对象提供。 */
+/** 按场景实体标识提供英文教程文案。 */
 export const EN_SCENE_TEXT = {
-  "nav-work": "Work", "nav-about": "About", "nav-stack": "Stack", "nav-contact": "Contact",
-  "hero-title": "Ideas into\nreality.", "hero-work-text": "Explore my work ↗", "hero-contact-text": "Say hello",
-  "hero-note": "Building a small digital world, one line of code at a time.",
-  "work-title": "Ideas made real.", "work-lead": "From curiosity to something you can explore.",
-  "work-open-0": "View project ↗", "work-open-1": "View project ↗", "work-open-2": "View project ↗",
-  "about-title": "Stay curious.\nBuild with care.", "about-note-text": "Make it useful, then make it distinct.",
-  "stack-title": "The right tools\nfor the job.", "contact-title": "Let's make\nsomething good.",
-  "contact-description": "An idea, a question,\nor just a hello.", "contact-button-text": "Say hello ↗",
-  "footer-home": "Back to top ↑", "footer-replay": "Replay ↻", "footer-copy": "© 2026 Axin · Made with curiosity.",
+  "nav-work": "Steps", "nav-about": "About", "nav-stack": "Features", "nav-contact": "Install",
+  "hero-title": "Build with\na swarm.", "hero-work-text": "Get started ↗", "hero-contact-text": "Install skill",
+  "hero-copy": "Copy install command ↗",
+  "hero-note": "Editable source. A page built together, as you explore.",
+  "work-title": "From install to creation.", "work-lead": "Three steps to bring the experience into your project.",
+  "work-open-0": "View step ↗", "work-open-1": "View step ↗", "work-open-2": "View step ↗",
+  "about-title": "How does\nit work?", "about-note-text": "Configure the scene. Make it your own.",
+  "stack-title": "Everything you\nneed to build.", "contact-title": "Have a\nquestion?",
+  "contact-description": "Questions or ideas?\nGet in touch with the author.", "contact-button-text": "Contact author ↗",
+  "footer-home": "Back to top ↑", "footer-replay": "Replay ↻", "footer-copy": "Swarm Cursors Skills · Editable source for your project.",
 };
 
-/** 根据所选语言返回个人资料。 */
+/** 根据所选语言返回教程内容。 */
 export function getProfile(language) {
-  // 中英文资料共享链接和项目标识，确保切换不改变实际业务动作。
+  // 两种语言共享仓库地址和步骤标识。
   return language === "zh" ? PROFILE : EN_PROFILE;
 }

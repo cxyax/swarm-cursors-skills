@@ -42,10 +42,11 @@ function useMobileLayout() {
 export default function App() {
   // 业务弹窗由宿主维护，不需要修改技能的通用施工调度逻辑。
   const mobile = useMobileLayout();
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("zh");
   const profile = getProfile(language);
   const [replay, setReplay] = useState(0);
   const [dialog, setDialog] = useState(null);
+  const [copyMessage, setCopyMessage] = useState("");
   const sceneFactory = useCallback(
     (getWorkerCount) => createPersonalScene(getWorkerCount, { mobile, language }),
     [mobile, language]
@@ -54,8 +55,15 @@ export default function App() {
   useEffect(() => {
     // 同步文档语言与标题，供浏览器和辅助技术使用。
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
-    document.title = language === "zh" ? "程序员阿鑫 — 把想法写成现实" : "Axin — Ideas into reality";
+    document.title = language === "zh" ? "Swarm Skill — 安装与使用教程" : "Swarm Skill — Installation and guide";
   }, [language]);
+
+  useEffect(() => {
+    // 复制反馈短暂显示后自动消失，语言切换时也清理旧提示。
+    if (!copyMessage) return undefined;
+    const timer = window.setTimeout(() => setCopyMessage(""), 3000);
+    return () => window.clearTimeout(timer);
+  }, [copyMessage]);
 
   /** 关闭当前个人资料或项目弹窗，焦点恢复由原生模态组件负责。 */
   const closeDialog = useCallback(() => {
@@ -84,6 +92,20 @@ export default function App() {
           if (profile.projects[action.index])
             setDialog({ kind: PersonalDialogKind.PROJECT, index: action.index });
           return true;
+        case PersonalAction.COPY_INSTALL:
+          // 同步接管动作，剪贴板不可用时打开可手动复制的安装说明。
+          if (!navigator.clipboard?.writeText) {
+            setDialog({ kind: PersonalDialogKind.INSTALL });
+            return true;
+          }
+          navigator.clipboard.writeText(profile.projects[0].command).then(
+            () => setCopyMessage(language === "zh" ? "安装命令已复制" : "Install command copied"),
+            () => setDialog({ kind: PersonalDialogKind.INSTALL })
+          );
+          return true;
+        case PersonalAction.INSTALL:
+          setDialog({ kind: PersonalDialogKind.INSTALL });
+          return true;
         case PersonalAction.CONTACT:
           setDialog({ kind: PersonalDialogKind.CONTACT });
           return true;
@@ -94,16 +116,16 @@ export default function App() {
           return false;
       }
     },
-    [replayScene, profile]
+    [replayScene, profile, language]
   );
 
   return (
     <>
-      <h1 className="visually-hidden">{language === "zh" ? `${profile.name}的个人主页 · 把想法写成现实` : `${profile.name} · Ideas into reality`}</h1>
+      <h1 className="visually-hidden">{language === "zh" ? `${profile.name}安装与使用教程` : `${profile.name} · Installation and guide`}</h1>
       <SwarmExperience
         key={`${mobile ? "mobile" : "desktop"}-${language}-${replay}`}
         sceneFactory={sceneFactory}
-        interactions={PERSONAL_INTERACTIONS.map((item) => ({ ...item, label: language === "zh" ? item.label : ({ "brand": "Back to top", "nav-work": "View work", "nav-about": "About", "nav-stack": "Tools", "nav-contact": "Contact", "hero-work": "Explore work", "hero-contact": "Say hello", "contact-button": "Contact", "footer-home": "Back to top", "footer-replay": "Replay animation" }[item.id] || "View project details") }))}
+        interactions={PERSONAL_INTERACTIONS.map((item) => ({ ...item, label: language === "zh" ? item.label : ({ "brand": "Back to top", "nav-work": "View steps", "nav-about": "About", "nav-stack": "Features", "nav-contact": "Install", "hero-work": "Get started", "hero-contact": "Install skill", "hero-copy": "Copy install command", "contact-button": "Contact author", "footer-home": "Back to top", "footer-replay": "Replay animation" }[item.id] || "View step details") }))}
         onAction={onAction}
         autoStart
       />
@@ -117,6 +139,7 @@ export default function App() {
           <span aria-hidden="true">↻</span> {language === "zh" ? "重播施工" : "Replay"}
         </button>
       </aside>
+      <div className="copy-notice" role="status" aria-live="polite">{copyMessage}</div>
       <PersonalDialog dialog={dialog} onClose={closeDialog} language={language} profile={profile} />
     </>
   );

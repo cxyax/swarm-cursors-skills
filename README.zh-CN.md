@@ -8,7 +8,7 @@
 
 效果参考 [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors)：多个光标一起拉框、描线、输入文字、拖出辅助线、复制卡片，随着滚动逐步完成页面。本项目将这一类体验落实为工程内可编辑、可维护的 React 源码，由你自己的页面直接运行。
 
-本仓库主要提供 **`swarm-page-builder` Skill**，包含接入指引、源码模板和迁移脚本。根目录的个人主页是使用该 Skill 制作的 **Demo**，展示场景定制、业务交互与手机布局。
+本仓库主要提供 **`swarm-page-builder` Skill**，包含接入指引、源码模板和迁移脚本。根目录的教程页面是使用该 Skill 制作的 **Demo**，展示场景定制、业务交互与手机布局。
 
 **[在线演示](https://cxyax.github.io/swarm-cursors-skills/)** · **[GitHub 仓库](https://github.com/cxyax/swarm-cursors-skills)** · **[Skill 入口](skills/swarm-page-builder/SKILL.zh-CN.md)**
 
@@ -118,7 +118,7 @@ npm install
 npm run dev
 ```
 
-默认访问 `http://127.0.0.1:8000/`，滚动页面或点击中心标志开始施工。生成的是通用模板；根目录个人主页 Demo 的文案、18 个光标配置和手机单列布局属于另行定制的示例。
+默认访问 `http://127.0.0.1:8000/`，滚动页面或点击中心标志开始施工。生成的是通用模板；根目录教程 Demo 的文案、18 个光标配置和手机单列布局属于另行定制的示例。
 
 **复制到已有 React 项目：**
 
@@ -156,7 +156,7 @@ npm ci
 npm run dev
 ```
 
-打开 `http://127.0.0.1:5174/`。页面默认显示英文，可用右下角的“中文 / EN”按钮切换语言；切换时会重新播放施工动画。页面自动开始施工，向下滚动继续构建后续内容；已完成的作品卡片可查看详情，联系入口支持邮箱复制，右下角可重新播放。
+打开 `http://127.0.0.1:5174/`。页面默认显示中文，可用右下角的“中文 / EN”按钮切换语言；切换时会重新播放施工动画。首页支持复制安装命令，向下滚动可查看教程和联系作者，右下角可重新播放。
 
 端口冲突时运行 `npm run dev -- --port 5175`。需要自行检查生产构建时执行：
 
@@ -179,7 +179,7 @@ npm run preview
 | 光标数量、名称及状态 | [`src/swarm/animation/config.js`](src/swarm/animation/config.js) |
 | 页面标题、描述与字体加载 | [`index.html`](index.html) |
 
-Fork 后请替换 Demo 中的个人资料和联系邮箱。作品 `url` 为空时展示本地详情，填写真实链接后可跳转至对应作品。
+Fork 后可修改 Demo 中的教程内容和联系邮箱。
 
 Skill 导出的通用模板从 `src/swarm/scene/sections/` 修改页面内容，详细协议见[场景与交互定制](skills/swarm-page-builder/references/customization.zh-CN.md)。自定义 `sceneFactory` 时同时传入匹配的 `interactions`；更换场景或重播可通过 React 的 `key` 重建实例。
 
@@ -210,7 +210,7 @@ swarm-cursors-skills/
 │   ├── scripts/scaffold.py     # 独立项目 / React 模块复制脚本
 │   ├── references/             # 接入、定制与来源说明
 │   └── assets/template/        # 随 Skill 分发的源码模板
-├── src/personal/               # 个人主页 Demo 场景与交互
+├── src/personal/               # 教程 Demo 场景与交互
 ├── src/swarm/                  # Demo 动画模块
 ├── public/                     # Demo 静态资源
 ├── .github/workflows/deploy.yml # GitHub Pages 自动部署
@@ -228,4 +228,4 @@ swarm-cursors-skills/
 
 效果参考 [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors)，其项目说明将原始视觉与动画设计归功于 [Joel Califa 的 Swarm](https://califa.github.io/swarm-site/)。感谢这些项目提供的创意与参考。
 
-本仓库通过 Skill 提供工程内的源码接入方式，与参考项目没有官方关联。参考仓库目前未声明开源许可证；本仓库的许可证仍待源码来源与授权范围确认，当前不作整仓 MIT 授权声明。详细来源与许可边界见 [SOURCE.zh-CN.md](SOURCE.zh-CN.md)。
+本项目采用 [MIT 许可证](LICENSE)，通过 Skill 提供工程内的源码接入方式，与参考项目没有官方关联。参考仓库目前未声明开源许可证；本项目的 MIT 许可证不授予第三方素材的权利，源码关系仍待确认。详细来源与许可边界见 [SOURCE.zh-CN.md](SOURCE.zh-CN.md)。

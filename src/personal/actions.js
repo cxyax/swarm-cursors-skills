@@ -4,12 +4,15 @@ import { ActionType, InteractionStyle } from "../swarm/index.js";
 export const PersonalDialogKind = Object.freeze({
   PROJECT: "project",
   CONTACT: "contact",
+  INSTALL: "install",
 });
 
 /** 交给个人主页处理的业务动作，和施工引擎内置动作隔离。 */
 export const PersonalAction = Object.freeze({
   PROJECT: "open-project",
   CONTACT: "open-contact",
+  INSTALL: "open-install",
+  COPY_INSTALL: "copy-install",
   REPLAY: "replay",
 });
 
@@ -52,18 +55,23 @@ function button(id, label, action) {
 }
 
 const contactAction = { type: ActionType.CUSTOM, name: PersonalAction.CONTACT };
+const installAction = { type: ActionType.CUSTOM, name: PersonalAction.INSTALL };
 
 /** 全部导航、作品和联系入口，独立于页面尺寸和动画状态。 */
 export const PERSONAL_INTERACTIONS = [
   link("brand", "回到首页", { type: ActionType.SCROLL }),
-  link("nav-work", "查看作品", { type: ActionType.SCROLL, target: "work-title" }),
-  link("nav-about", "关于我", { type: ActionType.SCROLL, target: "about-title" }),
-  link("nav-stack", "技术与工具", { type: ActionType.SCROLL, target: "stack-title" }),
-  link("nav-contact", "联系我", contactAction),
-  button("hero-work", "看看我的作品", { type: ActionType.SCROLL, target: "work-title" }),
-  button("hero-contact", "打个招呼", contactAction),
+  link("nav-work", "查看步骤", { type: ActionType.SCROLL, target: "work-title" }),
+  link("nav-about", "了解 Skill", { type: ActionType.SCROLL, target: "about-title" }),
+  link("nav-stack", "查看能力", { type: ActionType.SCROLL, target: "stack-title" }),
+  link("nav-contact", "安装 Skill", installAction),
+  button("hero-work", "开始使用", { type: ActionType.SCROLL, target: "work-title" }),
+  button("hero-contact", "安装 Skill", installAction),
+  {
+    ...link("hero-copy", "复制安装命令", { type: ActionType.CUSTOM, name: PersonalAction.COPY_INSTALL }),
+    after: ["t:hero-command", "t:hero-copy"],
+  },
   ...[0, 1, 2].map((index) => ({
-    ...link(`work-open-${index}`, `查看第${index + 1}个项目详情`, {
+    ...link(`work-open-${index}`, `查看第${index + 1}个步骤`, {
       type: ActionType.CUSTOM,
       name: PersonalAction.PROJECT,
       index,
@@ -72,7 +80,7 @@ export const PERSONAL_INTERACTIONS = [
     after: [`r:work-card-${index}`, `t:work-open-${index}`, `t:work-name-${index}`],
     style: InteractionStyle.BUTTON,
   })),
-  button("contact-button", "打开联系方式", contactAction),
+  button("contact-button", "联系作者", contactAction),
   link("footer-home", "返回顶部", { type: ActionType.SCROLL }),
   link("footer-replay", "重新播放施工动画", {
     type: ActionType.CUSTOM,

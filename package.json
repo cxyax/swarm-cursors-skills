@@ -2,6 +2,7 @@
   "name": "swarm-cursors-skills",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "在工程源码中实现多光标协作施工效果的Skill与React演示项目",
   "repository": {

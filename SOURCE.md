@@ -14,4 +14,4 @@ The template consists of editable React source organized and rebuilt from this p
 
 The `DhvanilPatel/swarm-cursors` README states that it currently has no license and that parts of its animation engine were adapted from the original Swarm site, which has no stated license. This does not establish that all files in this repository came from the reference repository, and it does not grant rights to that code.
 
-The precise relationship between this source and the reference implementation, and the scope of any license that can be granted, remain to be confirmed by the maintainer. This repository does not currently claim a repository-wide MIT or other open-source license. Publicly showing source and granting rights to use, modify and redistribute it are distinct; add the applicable license and third-party notices once provenance is confirmed.
+This project is distributed under the MIT License. That license applies to rights the project can grant and does not grant rights to third-party material. The precise relationship between this source and the reference implementation remains to be confirmed by the maintainer.

@@ -292,7 +292,7 @@ function closing(scene, layout, getWorkerCount) {
  * @param {{mobile?:boolean}} [options] 布局选项。
  * @returns {{els:object[],tasks:object[],groups:object[],height:number,width:number}} 可直接交给施工引擎的页面。
  */
-export function createPersonalScene(getWorkerCount, { mobile = false, language = "zh" } = {}) {
+export function createPersonalScene(getWorkerCount, { mobile = false, language = "en" } = {}) {
   // 手机画布使用480设计宽度，每个区块重排，不把1280宽的桌面内容整体缩小。
   const layout = mobile
     ? { mobile, width: 480, left: 32, right: 448, heroBottom: 936, workBottom: 2660, aboutBottom: 3260, stackBottom: 3880, footerTop: 4374, height: 4710 }

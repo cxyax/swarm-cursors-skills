@@ -42,7 +42,7 @@ function useMobileLayout() {
 export default function App() {
   // 业务弹窗由宿主维护，不需要修改技能的通用施工调度逻辑。
   const mobile = useMobileLayout();
-  const [language, setLanguage] = useState("zh");
+  const [language, setLanguage] = useState("en");
   const profile = getProfile(language);
   const [replay, setReplay] = useState(0);
   const [dialog, setDialog] = useState(null);

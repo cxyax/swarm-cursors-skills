@@ -145,7 +145,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:5174/`. The demo starts in Chinese; use the language button in the bottom-right dock to switch to English. Switching language restarts the construction. Copy the install command from the first screen, scroll to explore the guide, contact the author, or replay the animation.
+Open `http://127.0.0.1:5174/`. The demo starts in English; use the language button in the bottom-right dock to switch to Chinese. Switching language restarts the construction. Copy the install command from the first screen, scroll to explore the guide, contact the author, or replay the animation.
 
 If the port is occupied, use `npm run dev -- --port 5175`. To build and preview locally:
 
